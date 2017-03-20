@@ -11,6 +11,8 @@ const router = new VueRouter({
         { name: 'encode', path: '/encode', component: require('../pages/encode'), meta: {  } },
         { name: 'tobase64', path: '/tobase64', component: require('../pages/tobase64'), meta: {  } },
         { name: 'strsplit', path: '/strsplit', component: require('../pages/strsplit'), meta: {  } },
+        { name: 'rmbconvert', path: '/rmbconvert', component: require('../pages/rmbconvert'), meta: {  } },
+        
     ]
 })
 

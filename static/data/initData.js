@@ -1,3 +1,6 @@
+
+window.siteData=getSitInitData();
+initTongJi()
 function getSitInitData(){
     var data={};
     data.MenuItems=getMenuItems();
@@ -34,6 +37,11 @@ function getMenuItems(){
                     MenuName: '字符串替换',
                     MenuUrl: '/strsplit'
                 },
+                {
+                    Key: '205',
+                    MenuName: '人民币转换',
+                    MenuUrl: '/rmbconvert'
+                },
                 // {
                 //     Key: '205',
                 //     MenuName: 'Markdown转换',
@@ -43,4 +51,12 @@ function getMenuItems(){
         // },
     ];
 }
-window.siteData=getSitInitData();
+function initTongJi(){
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?83ed2a06b8c764cebb78eece2c3452a2";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+}
