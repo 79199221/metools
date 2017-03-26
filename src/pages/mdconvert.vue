@@ -4,7 +4,7 @@
             <v-input-txt label="Markdown" v-model="mdText"></v-input-txt>
             <div class="layui-form-item layui-form-text">
                 <div class="layui-input-block">
-                    <v-button @click="convert">转换</v-button>
+                    <v-button><i class="layui-icon">&#xe61a; </i>自动转换</v-button>
                 </div>
             </div>
             <v-input-txt label="Html"  v-bind:value="htmlText"></v-input-txt>
