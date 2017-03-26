@@ -25,6 +25,11 @@
                         Name:'main'
                     },
                     {
+                        Name:'source',
+                        Title:'marked使用',
+                        Url:'https://github.com/chjj/marked'
+                    },
+                    {
                         Title:'查看代码',
                         Name:'code',
                         Url:'http://coding.net/u/yimocoding/p/metools/git/blob/master/src/pages/mdconvert.vue',

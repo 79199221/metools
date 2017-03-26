@@ -42,6 +42,11 @@ function getMenuItems(){
                     Key: '206',
                     MenuName: 'Markdown转换',
                     MenuUrl: '/mdconvert'
+                },
+                {
+                    Key: '207',
+                    MenuName: '二维码生成',
+                    MenuUrl: '/qrcode'
                 }
         //     ]
         // },
