@@ -9,11 +9,12 @@
 
 实现列表
 -----------------------
-1. 加密/解密类 (使用[crypto-js](https://www.npmjs.com/package/crypto-js))      
-2. 编码/解码     
-3. 图片转base64        
+1. 加密/解密类 ['AES','DES','RC4','Rabbit','TripleDES','Base64','MD5','SHA1','SHA224','SHA256','SHA384','SHA512','HmacSHA1','HmacSHA224','HmacSHA256','HmacSHA384','HmacSHA512','HmacMD5']          
+2. 编码/解码 ['utf-8', 'ascii', 'unicode', 'url', 'base64']     
+3. 图片转base64
 4. 字符串替换
-5. 待续...
+5. MarkDown转HTML
+6. 生成二维码
 
 技术栈
 --------------------       
