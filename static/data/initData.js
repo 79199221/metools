@@ -1,11 +1,7 @@
-
-window.siteData=getSitInitData();
-initTongJi()
-function getSitInitData(){
-    var data={};
-    data.MenuItems=getMenuItems();
-    return data;
+window.siteData={
+    MenuItems:getMenuItems(),
 }
+initTongJi()
 function getMenuItems(){
     return [
         {
@@ -42,11 +38,11 @@ function getMenuItems(){
                     MenuName: '人民币转换',
                     MenuUrl: '/rmbconvert'
                 },
-                // {
-                //     Key: '205',
-                //     MenuName: 'Markdown转换',
-                //     MenuUrl: '/mdhh'
-                // }
+                {
+                    Key: '206',
+                    MenuName: 'Markdown转换',
+                    MenuUrl: '/mdconvert'
+                }
         //     ]
         // },
     ];

@@ -12,6 +12,7 @@ const router = new VueRouter({
         { name: 'tobase64', path: '/tobase64', component: require('../pages/tobase64'), meta: {  } },
         { name: 'strsplit', path: '/strsplit', component: require('../pages/strsplit'), meta: {  } },
         { name: 'rmbconvert', path: '/rmbconvert', component: require('../pages/rmbconvert'), meta: {  } },
+        { name: 'mdconvert', path: '/mdconvert', component: require('../pages/mdconvert'), meta: {  } },
         
     ]
 })

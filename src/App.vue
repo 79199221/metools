@@ -1,6 +1,6 @@
 <template>
      <div class="layui-layout layui-layout-admin"  id="app">
-        <div class="layui-header ymheader" v-if="!readyShowContent">
+        <div class="layui-header ymheader">
             <a href="/"><img class="logo layui-circle" src="./assets/images/logo.png"></a>
             <div class="searchTxt">
                 <input type="text" class="layui-input" placeholder="搜索" @keyup.enter="search"/>
@@ -9,15 +9,15 @@
                <a href="/">个人工具站 - By </a> <a href="http://www.yimo.link" target="_blank">易墨</a>
             </div>
         </div>
-        <div class="layui-side layui-bg-black" id="leftMenu" v-if="!readyShowContent">
+        <div class="layui-side layui-bg-black" id="leftMenu">
             <div class="layui-side-scroll">
                 <v-header :menuType="1" :menuModel="menuItems" :allOpen="true"></v-header>
             </div>
         </div>
-        <div class="layui-body layui-tab-content" id="rightContent" style="bottom:30px" :style="readyShowContent?'top:0;left:0;':''">
+        <div class="layui-body layui-tab-content" id="rightContent">
             <router-view></router-view>
         </div>
-        <div class="layui-footer footer footer-doc "  id="contentFooter">
+        <div class="layui-footer footer footer-doc" id="contentFooter">
             <p>
                 <a href="https://coding.net/u/yimocoding/p/metools/git" target="_blank">源码在此,拿走不谢。</a>
                 <a @click="openMsg">少年需要留个言么？</a>
@@ -29,8 +29,7 @@
 export default {
     data (){
       return {
-          menuItems:[],
-          readyShowContent:false
+          menuItems:[]
       }
     },
     methods:{
@@ -51,7 +50,6 @@ export default {
     },
     created(){
       this.menuItems=window.siteData.MenuItems;
-      console.log(this.menuItems)
     }
 }
 </script>

@@ -1,10 +1,6 @@
 <template>
-    <div style="width:100%;height:100%;" class="layui-tab-brief">
-        <ul class="layui-tab-title site-demo-title" style="margin-bottom:10px;">
-            <li class="layui-this">字符串替换</li>
-            <li @click="$options.filters.openRedirect('http://coding.net/u/yimocoding/p/metools/git/blob/master/src/pages/strsplit.vue')">查看代码</li>
-        </ul>
-        <div style="width:100%;height:100%;">   
+    <v-tab :items="tabItems">
+        <div slot="main">   
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">处理前</label>
                 <div class="layui-input-block">
@@ -37,12 +33,23 @@
                 </div>
             </div>
         </div>
-    </div>
+        </v-tab>
 </template>
 <script>
     export default {
         data() {
             return {
+                tabItems:[
+                    {
+                        Name:'main',
+                        Title:'字符串替换'
+                    },
+                    {
+                        Name:'code',
+                        Title:'查看代码',
+                        Url:'http://coding.net/u/yimocoding/p/metools/git/blob/master/src/pages/strsplit.vue'
+                    }
+                ],
                 beforeTxt:'',
                 afterTxt:'',
                 selectRule:'space',
