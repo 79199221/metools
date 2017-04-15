@@ -55,7 +55,7 @@ a{cursor: pointer;}
         margin-top: -10px;
         display: block;
         font-size: 18px;
-        text-shadow: 1px 1px
+        /*text-shadow: 1px 1px*/
     }
     #contentFooter{
         z-index:999;height:35px;

@@ -2,11 +2,13 @@
     <div style="width:100%;height:100%;" class="layui-tab-brief">
         <ul class="layui-tab-title site-demo-title" style="margin-bottom:10px;">
             <li class="layui-this">欢迎页</li>
+            <li @click="disabledColor" v-text="colorStatus"></li>
             <li @click="$options.filters.openRedirect('http://coding.net/u/yimocoding/p/metools/git/blob/master/src/pages/home.vue')">查看代码</li>
         </ul>
         <div style="width:100%;height:100%;">
             <div v-for="item in menus" class="welcome layui-circle" @click="$options.filters.openRoute(item.MenuUrl)" :style="color()">
-                <router-link :to="{path:item.MenuUrl}">{{item.MenuName}}</router-link>
+                <router-link :to="{path:item.MenuUrl}" v-if="item.MenuUrl && item.MenuUrl.indexOf('/')==0 ">{{item.MenuName}}</router-link>
+                <a :href="item.MenuUrl" target="_blank" v-else>{{item.MenuName}}</a>
             </div>
         </div>
     </div>
@@ -16,6 +18,7 @@
         data() {
             return {
                 colorValue: '',
+                colorStatus:'颜色随机',
                 menus: []
             }
         },
@@ -32,9 +35,18 @@
                     self.menus.push(item)
                 }
             })
+
+            this.colorStatus=localStorage.getItem('defColorStatus')||this.colorStatus;
         },
         methods: {
+            disabledColor(){
+                this.colorStatus = this.colorStatus=='颜色随机'?'固定颜色':'颜色随机'
+                localStorage.setItem('defColorStatus',this.colorStatus)
+            },
             color() {
+                if(this.colorStatus=='固定颜色'){
+                    return 'background-color:#1aa094';
+                }
                 let rseed = []
                 for (var i = 1; i < 10; i++) {
                     rseed.push(i);

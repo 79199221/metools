@@ -1,16 +1,6 @@
 import config from 'config'
 import cacheHelper from './cacheHelper'
 export default {
-    GetApiAddressByArtType(pageType) {
-          var url = '';
-          if(pageType == 'index') {
-            url = '/api/ObtainData/GetSetting';
-          } else {
-            var pageApiName = pageType == 'list' ? 'GetList' : 'GetDetail';
-            url = "/api/ObtainData/" + pageApiName;
-          }
-          return config.apiDomain + url;
-    },
     SendRequest(url, data, successCallback, other, type) {
         var other = other || {};
         var def = {
@@ -32,16 +22,5 @@ export default {
         } else {
           mui.ajax(url, def);
         }
-    },
-    GetMenuItems() {
-        var customMenu=cacheHelper.GetCacheByKey(config.customMenusCacheKey)
-        console.log(customMenu)
-        var menus=cacheHelper.GetCacheByKey(config.menusCacheKey);
-        if(customMenu!=null && customMenu.length>0){
-            customMenu.forEach(item=>{
-                menus.push(item);
-            })
-        }
-        return menus;
     }
 }
