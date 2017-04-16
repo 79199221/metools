@@ -11,6 +11,16 @@ function getMenuItems(){
             MenuUrl: '/home'
         },
         {
+            Key: '208',
+            MenuName: '在线翻译',
+            MenuUrl: '/fanyi'
+        },
+        {
+            Key: '207',
+            MenuName: '二维码生成',
+            MenuUrl: '/qrcode'
+        },
+        {
             Key: '201',
             MenuName: '加密/解密',
             MenuUrl: '/encrypt'
@@ -41,11 +51,6 @@ function getMenuItems(){
             MenuUrl: '/mdconvert'
         },
         {
-            Key: '207',
-            MenuName: '二维码生成',
-            MenuUrl: '/qrcode'
-        },
-        {
             Key: '300',
             MenuName: '友情链接',
             ChildrenMenu:[
@@ -55,13 +60,8 @@ function getMenuItems(){
                     MenuUrl: 'http://www.yimo.link',
                 },
                 {
-                    Key: '302',
-                    MenuName: '还可以当收藏夹用',
-                    MenuUrl: 'http://tools.yimo.link',
-                },
-                {
                     Key: '303',
-                    MenuName: '没找到？那就戳这里',
+                    MenuName: '都没有？那就戳这里',
                     MenuUrl: 'http://tool.oschina.net/',
                 }
             ]
@@ -72,9 +72,14 @@ function getSiteInfo(){
     return {
         SiteName:'个人工具站 - By 易墨',
         LogoUrl:'',//http://www.yimo.link/static/imgs/logo.png',
+        ShowMsg:true,
         FooterLinks:[
             {
-                Title:'源码在此,拿走不谢。',
+                Title: '易墨‘s_Blog',
+                Url: 'http://www.yimo.link',
+            },
+            {
+                Title:'源码在此,拿走不谢',
                 Url:'https://coding.net/u/yimocoding/p/metools/git'
             }
         ]

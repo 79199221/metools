@@ -2,7 +2,7 @@
     <div class="uploadLayer" >
         <img class="uploadimg" :src="displayImg" v-if="displayImg">
         <img class="uploadimg" src="../assets/images/logo.png" v-else />
-        <input type="file" name="file" class="layui-upload-file" :id="uploadId">        
+        <input type="file" accept="image/*" name="file" class="layui-upload-file" :id="uploadId">        
         <!--<div class="layui-box layui-upload-button">
             <input type="file" name="file" class="layui-upload-file" :id="uploadId">
             <span class="layui-upload-icon" style="margin:0px;"><i class="layui-icon"></i>上传</span>

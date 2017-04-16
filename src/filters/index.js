@@ -7,6 +7,10 @@ export default {
         return 'https://dn-coding-net-production-static.qbox.me/static/7a51352fa766f4176d7c4543339e0e98.png';
     },
     openRoute(route){
+        if(typeof(route)==='string' && route.indexOf('http')==0){
+            this.openRedirect(route);
+            return;
+        }
         router.push(route);
     },
     openRedirect(url){

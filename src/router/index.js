@@ -14,7 +14,8 @@ const router = new VueRouter({
         { name: 'rmbconvert', path: '/rmbconvert', component: require('../pages/rmbconvert'), meta: {  } },
         { name: 'mdconvert', path: '/mdconvert', component: require('../pages/mdconvert'), meta: {  } },
         { name: 'qrcode', path: '/qrcode', component: require('../pages/qrcode'),meta:{} },
-        { name: '404', path: '*', component: require('../pages/home'),meta:{} }
+        { name: 'fanyi', path: '/fanyi', component: require('../pages/fanyi'),meta:{} },
+        { name: '404', path: '*',  redirect: '/home'  }
     ]
 })
 

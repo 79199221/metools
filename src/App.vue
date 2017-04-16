@@ -1,18 +1,18 @@
 <template>
      <div class="layui-layout layui-layout-admin"  id="app">
         <div class="layui-header ymheader">
-            <a href="/">
+            <a @click="$options.filters.openRoute('/')">
                 <img class="logo layui-circle" v-if="siteInfo.LogoUrl" :src="siteInfo.LogoUrl">
                 <img class="logo layui-circle" v-else src="./assets/images/logo.png">
             </a>
             <div class="searchTxt">
-                <input type="text" class="layui-input" placeholder="搜索" @keyup.enter="search"/>
+                <input type="text" v-model="searchTxt" class="layui-input" placeholder="搜索" @keyup.enter="search"/>
             </div>
             <div class="user-action" v-if="siteInfo.SiteName">
-               <a href="/" v-text="siteInfo.SiteName"></a>
+               <a @click="$options.filters.openRoute('/')" v-text="siteInfo.SiteName"></a>
             </div>
             <div class="user-action" v-else>
-               <a href="/">个人工具站 - By </a> <a href="/" target="_blank">易墨</a>
+               <a @click="$options.filters.openRoute('/')" >个人工具站 - By 易墨</a>
             </div>
         </div>
         <div class="layui-side layui-bg-black" id="leftMenu">
@@ -26,7 +26,7 @@
         <div class="layui-footer footer footer-doc" id="contentFooter" >
             <p v-if="siteInfo.FooterLinks && siteInfo.FooterLinks.length>0">
                 <a :href="item.Url" v-text="item.Title" v-for="item in siteInfo.FooterLinks"  target="_blank"></a>
-                <a @click="openMsg">少年需要留个言么？</a>
+                <a @click="openMsg" v-if="siteInfo.ShowMsg">少年需要留个言么？</a>
             </p>
         </div>
     </div>
@@ -39,13 +39,28 @@ export default {
           siteInfo:{
               LogoUrl:'',
               SiteName:'',
+              ShowMsg:false,
               FooterLink:[]
           }
       }
     },
     methods:{
         search(){
-            layer.msg('不要了吧，这么点功能还搜索，后面再说~')
+            var txt=this.searchTxt
+            var newMenu=[];
+            window.siteData.MenuItems.forEach(function(item) {
+                if((item.MenuName && item.MenuName.indexOf(txt)>-1 ) || (item.MenuUrl && item.MenuUrl.indexOf(txt)>-1)){
+                    newMenu.push(item);
+                }
+            });
+            console.log(newMenu);
+            if(newMenu.length>0){
+                this.menuItems=newMenu;
+            }
+            else{
+                this.menuItems=window.siteData.MenuItems;
+                layer.msg('然而并没有搜到什么~')
+            }
         },
         openMsg(){
             layer.open({            
