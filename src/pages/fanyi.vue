@@ -102,7 +102,7 @@ export default {
                 self.model.beforeTxt = '';
                 return;
             }
-            var api = 'https://fanyi.youdao.com/openapi.do?keyfrom=metools&key=955743043&type=data&doctype=jsonp&version=1.1&q=' +str;
+            var api = '//fanyi.youdao.com/openapi.do?keyfrom=metools&key=955743043&type=data&doctype=jsonp&version=1.1&q=' +str;
             self.loading = true;
             layui.jquery.ajax({
                 url:api,
@@ -127,6 +127,7 @@ export default {
             })
         },
         baidufanyi(){
+            var url=common.getProtocol()=='http'?'http://api.fanyi.baidu.com/api/trans/vip/translate':'https://fanyi-api.baidu.com/api/trans/vip/translate';
             //http://api.fanyi.baidu.com/api/trans/product/apihelp
             let self=this;
             var appid = '20170416000044969';
@@ -140,7 +141,7 @@ export default {
             var sign = CryptoJS['MD5'](str1).toString();
             self.loading2=true;
             layui.jquery.ajax({
-                url: 'https://api.fanyi.baidu.com/api/trans/vip/translate',
+                url: url,
                 type: 'get',
                 dataType: 'jsonp',
                 data: {

@@ -32,5 +32,8 @@ export default {
         if(str)
             return str.replace(/\ +/g, '').replace(/[ ]/g, '');
         return '';
+    },
+    getProtocol(){
+        return location.protocol=='https:'?'https':'http';
     }
 }
