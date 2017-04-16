@@ -80,3 +80,28 @@ export default {
     }
 }
 </script>
+<style>
+    @media screen and (max-width: 500px){
+        .searchTxt{
+            display: none;
+        }
+        .layui-form-item .layui-form-label{
+            display: none;
+        }
+        .layui-form-item .layui-input-block{
+                margin-left: auto;
+        }
+        .layui-tab-title li[tabcode="code"]{
+            display: none;
+        }
+        #contentFooter{
+            display: none;
+        }
+        .layui-layout-admin .layui-body{
+            bottom: 0;
+        }
+        .welcome.layui-circle{
+            margin-left: 10%;
+        }
+    }
+</style>

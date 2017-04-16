@@ -1,7 +1,7 @@
 <template>
     <div :class="defClass">
         <ul class="layui-tab-title site-demo-title" style="margin-bottom:10px;">
-            <li :class="{'layui-this':currentTab==item.Name}" @click="current(item)" v-for="item in items" v-text="item.Title"></li>
+            <li :class="{'layui-this':currentTab==item.Name}" :tabCode="item.Name"  @click="current(item)" v-for="item in items" v-text="item.Title"></li>
         </ul>
         <div  class="layui-tab-content">   
             <div  class="layui-tab-item" :class="{'layui-show':currentTab==item.Name}"  v-for="item in items">

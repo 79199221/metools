@@ -79,8 +79,8 @@ function getSiteInfo(){
                 Url: 'http://www.yimo.link',
             },
             {
-                Title:'源码在此,拿走不谢',
-                Url:'https://coding.net/u/yimocoding/p/metools/git'
+                Title:'分分钟拥有自己的站点吧',
+                Url:'https://coding.net/u/yimocoding/p/metools/git/blob/master/不花一分钱就能拥有自己的工具站点.MD'
             }
         ]
     }

@@ -89,7 +89,7 @@ export default {
                 self.model.beforeTxt = '';
                 return;
             }
-            var api = '//fanyi.youdao.com/openapi.do';
+            var api = common.getProtocol()+'//fanyi.youdao.com/openapi.do';
             self.loading = true;
             layui.jquery.ajax({
                 url:api,
