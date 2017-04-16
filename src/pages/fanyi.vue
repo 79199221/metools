@@ -84,34 +84,32 @@ export default {
         youdaofanyi() {
             //http://fanyi.youdao.com/openapi?path=data-mode
             let self = this;
-            // if(typeof(window.youDaoFanYi)!='function'){
-            //     window.youDaoFanYi = function (resp) {
-            //         self.loading = false;
-            //         if(resp.errorCode==0){
-            //             self.model.afterTxt = resp.translation;
-            //             self.model.jsonData='';
-            //         }
-            //         else{
-            //             self.model.afterTxt='翻译失败~~~'
-            //             self.model.jsonData=JSON.stringify(resp);
-            //         }
-            //     }
-            // }
             var str = this.model.beforeTxt;
             if (common.trim(str) == '') {
                 self.model.beforeTxt = '';
                 return;
             }
-            var api = '//fanyi.youdao.com/openapi.do?keyfrom=metools&key=955743043&type=data&doctype=jsonp&version=1.1&q=' +str;
+            var api = '//fanyi.youdao.com/openapi.do';
             self.loading = true;
             layui.jquery.ajax({
                 url:api,
+                data: {
+                    keyfrom:'metools',
+                    key:'955743043',
+                    type:'data',
+                    doctype:'jsonp',
+                    version:1.1,
+                    q: str,
+                },
                 type: 'get',
                 dataType: 'jsonp',
                 success: function (resp) {
                     self.loading = false;
                     if(resp.errorCode==0){
-                        self.model.afterTxt = resp.translation;
+                        self.model.afterTxt = '';
+                        resp.translation.forEach(item=>{
+                            self.model.afterTxt+=item+'\n'
+                        })
                         self.model.jsonData='';
                     }
                     else{
@@ -126,14 +124,18 @@ export default {
                 }
             })
         },
-        baidufanyi(){
-            var url=common.getProtocol()=='http'?'http://api.fanyi.baidu.com/api/trans/vip/translate':'https://fanyi-api.baidu.com/api/trans/vip/translate';
+        baidufanyi(){           
             //http://api.fanyi.baidu.com/api/trans/product/apihelp
             let self=this;
+            var url=common.getProtocol()=='http'?'http://api.fanyi.baidu.com/api/trans/vip/translate':'https://fanyi-api.baidu.com/api/trans/vip/translate';
+            if (common.trim(self.model.beforeTxt) == '') {
+                self.model.beforeTxt = '';
+                return;
+            }
             var appid = '20170416000044969';
             var key = 'X1ZMBUNuENgb7pzMVrpA';
             var salt = (new Date).getTime();
-            var query = self.model.beforeTxt;
+            var query =self.model.beforeTxt
             // 多个query可以用\n连接  如 query='apple\norange\nbanana\npear'
             var from = 'auto';
             var to = 'auto';
@@ -154,7 +156,11 @@ export default {
                 },
                 success: function (data) {
                     self.loading2=false;
-                    self.model.afterTxt2=data.trans_result[0].dst
+                    self.model.afterTxt2=''
+                    data.trans_result.forEach(item=>{
+                        self.model.afterTxt2+=item.dst+'\n'
+                    });
+                    self.model.jsonData='';
                 },
                 error:function(data){
                     self.loading2=false;
