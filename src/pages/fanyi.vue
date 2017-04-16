@@ -102,7 +102,7 @@ export default {
                 self.model.beforeTxt = '';
                 return;
             }
-            var api = 'http://fanyi.youdao.com/openapi.do?keyfrom=metools&key=955743043&type=data&doctype=jsonp&version=1.1&q=' +str;
+            var api = 'https://fanyi.youdao.com/openapi.do?keyfrom=metools&key=955743043&type=data&doctype=jsonp&version=1.1&q=' +str;
             self.loading = true;
             layui.jquery.ajax({
                 url:api,
@@ -140,7 +140,7 @@ export default {
             var sign = CryptoJS['MD5'](str1).toString();
             self.loading2=true;
             layui.jquery.ajax({
-                url: 'http://api.fanyi.baidu.com/api/trans/vip/translate',
+                url: 'https://api.fanyi.baidu.com/api/trans/vip/translate',
                 type: 'get',
                 dataType: 'jsonp',
                 data: {
