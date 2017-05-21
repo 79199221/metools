@@ -32,7 +32,7 @@
                 <label class="layui-form-label">转换后</label>
                 <div class="layui-input-block">
                     <textarea v-model="model.afterTxt"
-                              placeholder="转换后字符串..."
+                              placeholder="转换后字符串..." 
                               class="layui-textarea"></textarea>
                 </div>
             </div>
@@ -41,6 +41,7 @@
 </template>
 <script>
 import CryptoJS from 'crypto-js'
+import common from '../utils/common'
 export default {
     data() {
         return {
@@ -60,7 +61,7 @@ export default {
                 afterTxt: '',
                 currentType: ''
             },
-            codeTypes: ['utf-8', 'ascii', 'unicode', 'url', 'base64']
+            codeTypes: ['utf-8', 'ascii', 'unicode', 'url', 'base64','html']
         }
     },
     watch: {
@@ -108,6 +109,9 @@ export default {
                     var str=CryptoJS.enc.Utf8.parse(data.beforeTxt);
                     data.afterTxt = CryptoJS.enc.Base64.stringify(str);
                     break;
+                case 'html':
+                    data.afterTxt = common.toUbb(data.beforeTxt);
+                    break;
                 default:
                     break;
             }
@@ -149,6 +153,11 @@ export default {
                 case 'base64':
                     var words  = CryptoJS.enc.Base64.parse(data.afterTxt);
                     data.beforeTxt=words.toString(CryptoJS.enc.Utf8);
+                    break;
+                case 'html':
+                    data.beforeTxt = common.toHtml(data.afterTxt);
+                    break;
+                default:
                     break;
             }
             self.model.beforeTxt = data.beforeTxt;
