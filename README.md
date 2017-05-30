@@ -13,8 +13,8 @@
 2. 编码/解码 ['utf-8', 'ascii', 'unicode', 'url', 'base64']     
 3. 图片转base64
 4. 字符串替换
-5. MarkDown转HTML
-6. 生成二维码
+5. MarkDown与HTML互转
+6. 二维码生成,识别
 7. 在线翻译（百度，有道）
 
 技术栈

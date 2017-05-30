@@ -1,33 +1,42 @@
 <template>
     <v-tab :items="items">
-        <div slot="main">
-            <v-input-txt label="Markdown" v-model="mdText"></v-input-txt>
+        <div slot="toMarkdown">
+            <v-input-txt label="HTML" v-model="htmlText1" placeholder="HTML"></v-input-txt>
             <div class="layui-form-item layui-form-text">
                 <div class="layui-input-block">
-                    <v-button><i class="layui-icon">&#xe61a; </i>自动转换</v-button>
+                    <v-button icon="down" @click="toMarkdown()">转为Markdown</v-button>
                 </div>
             </div>
-            <v-input-txt label="Html"  v-bind:value="htmlText"></v-input-txt>
+            <v-input-txt label="MarkDown"  v-bind:value="mdText1" placeholder="MarkDown"></v-input-txt>
+        </div>
+        <div slot="toHtml">
+            <v-input-txt label="Markdown" v-model="mdText2" placeholder="MarkDown"></v-input-txt>
+            <div class="layui-form-item layui-form-text">
+                <div class="layui-input-block">
+                    <v-button icon="down" @click="toHtml()">转为Html</v-button>
+                </div>
+            </div>
+            <v-input-txt label="Html"  v-bind:value="htmlText2" placeholder="Html"></v-input-txt>
             <h2 class="site-tips">预览</h2>
-            <div v-html="htmlText" class="layui-input-block artcontent" >
+            <div v-html="htmlText2" class="layui-input-block artcontent" >
             </div>
         </div>
     </v-tab>
 </template>
 <script>
     import '../assets/css/markdown.css'
+    import toMarkdown from '../utils/tomarkdown'
     export default {
         data () {
             return {
                 items:[
                     {
-                        Title:'Markdown转换',
-                        Name:'main'
+                        Title:'Html转Markdown',
+                        Name:'toMarkdown'
                     },
                     {
-                        Name:'source',
-                        Title:'marked使用',
-                        Url:'https://github.com/chjj/marked'
+                        Title:'Markdown转Html',
+                        Name:'toHtml'
                     },
                     {
                         Title:'查看代码',
@@ -35,19 +44,14 @@
                         Url:'http://coding.net/u/yimocoding/p/metools/git/blob/master/src/pages/mdconvert.vue',
                     }
                 ],
-                mdText:''
-            }
-        },
-        created () {
-            
-        },
-        computed:{
-            htmlText(){
-                return this.convert(this.mdText);
+                htmlText1:'',
+                mdText1:'',
+                mdText2:'',
+                htmlText2:''
             }
         },
         methods: {
-            convert(){
+            convert(md){
                 var marked = require('marked');
                 marked.setOptions({
                     renderer: new marked.Renderer(),
@@ -59,7 +63,13 @@
                     smartLists: true,
                     smartypants: false
                 });
-                return marked(this.mdText);
+                return marked(md);
+            },
+            toHtml(){
+                this.htmlText2=this.convert(this.mdText2);
+            },
+            toMarkdown(){
+                this.mdText1=toMarkdown.toMarkdown(this.htmlText1)
             }
         }
 

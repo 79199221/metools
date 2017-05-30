@@ -35,7 +35,7 @@
                         reader.readAsDataURL(res.files[0]);
                         reader.onload = function(e){
                             self.displayImg=e.target.result
-                            self.$emit('before',self.displayImg);
+                            self.$emit('before',self.displayImg,res.files);
                         };
                     }
                 }

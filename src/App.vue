@@ -88,7 +88,7 @@ export default {
         .layui-form-item .layui-form-label{
             display: none;
         }
-        .layui-form-item .layui-input-block{
+        .layui-form-item .layui-input-block,.layui-form-item .layui-input-inline{
                 margin-left: auto;
         }
         .layui-tab-title li[tabcode="code"]{

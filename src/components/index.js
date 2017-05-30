@@ -14,4 +14,5 @@ export default {
     'v-upload': require('./YmUpload'),
     'v-tab': require('./YmTab'),
     'v-input-txt': require('./YmInputTxt'),
+    'v-icon': require('./YmIcon'),
 }

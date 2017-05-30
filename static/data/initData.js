@@ -17,8 +17,13 @@ function getMenuItems(){
         },
         {
             Key: '207',
-            MenuName: '二维码生成',
+            MenuName: '二维码生成/识别',
             MenuUrl: '/qrcode'
+        },
+        {
+            Key: '206',
+            MenuName: 'MD与Html互转',
+            MenuUrl: '/mdconvert'
         },
         {
             Key: '201',
@@ -46,11 +51,6 @@ function getMenuItems(){
             MenuUrl: '/rmbconvert'
         },
         {
-            Key: '206',
-            MenuName: 'Markdown转换',
-            MenuUrl: '/mdconvert'
-        },
-        {
             Key: '300',
             MenuName: '友情链接',
             ChildrenMenu:[
@@ -60,9 +60,9 @@ function getMenuItems(){
                     MenuUrl: 'http://www.yimo.link',
                 },
                 {
-                    Key: '303',
-                    MenuName: '都没有？那就戳这里',
-                    MenuUrl: 'http://tool.oschina.net/',
+                    Key: '302',
+                    MenuName: '听梦网',
+                    MenuUrl: 'http://www.mxmsg.com/',
                 }
             ]
         }

@@ -8,8 +8,8 @@
             <div class="layui-form-item layui-form-text">  
                 <label class="layui-form-label">上传图片</label>
                 <div class="layui-input-block">
-            <v-upload @before="toBase64" :beforeShow="true" :uploadApi="'/static/data/editorUpload.json'"></v-upload>
-            </div>
+                    <v-upload @before="toBase64" :beforeShow="true" :uploadApi="'/static/data/editorUpload.json'"></v-upload>
+                </div>
             </div>
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">Base64编码</label>
