@@ -1,23 +1,25 @@
 <template>
     <v-tab :items="tabItems">
-        <div slot="main">   
+        <div slot="main">
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">处理前</label>
                 <div class="layui-input-block">
-                    <textarea v-model="beforeTxt" placeholder="待处理字符串..." class="layui-textarea"></textarea>
+                    <textarea v-model="beforeTxt" placeholder="待处理字符串..." class="layui-textarea" rows="15"></textarea>
                 </div>
             </div>
-            <div class="layui-form-item layui-form-text">
+            <div class="layui-form-item layui-form-text" v-for="(item,index) in ruleA">
                 <label class="layui-form-label">替换规则</label>
                 <div class="layui-input-inline">
-                     <v-select v-model="selectRule" :options="selectOptions"></v-select>
+                     <input v-model="ruleA[index]"  class="layui-input" />
                 </div>
                 <div class="layui-input-inline">
                     <span style="height:38px;line-height:38px;">→_→</span>
                 </div>
                 <div class="layui-input-inline">
-                    <input type="text" class="layui-input" v-model="r2" placeholder="替换字符串"/>
+                    <input type="text" class="layui-input" v-model="ruleB[index]" placeholder="替换字符串"/>
                 </div>
+                <i class="layui-icon editicon" @click="addRule" v-if="index==0">&#xe654;</i>  
+                <i class="layui-icon editicon" @click="removeRule(index)" v-else>&#xe640;</i>  
             </div>
             <div class="layui-form-item layui-form-text">
                 <div class="layui-input-block">
@@ -29,12 +31,16 @@
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">处理后</label>
                 <div class="layui-input-block">
-                    <textarea v-model="afterTxt" placeholder="处理后字符串..." class="layui-textarea"></textarea>
+                    <textarea v-model="afterTxt" placeholder="处理后字符串..." class="layui-textarea" rows="15"></textarea>
                 </div>
             </div>
         </div>
         </v-tab>
 </template>
+<style>
+.editicon{font-size: 30px; color: #2F4056;cursor: pointer;}
+</style>
+
 <script>
     export default {
         data() {
@@ -52,41 +58,29 @@
                 ],
                 beforeTxt:'',
                 afterTxt:'',
-                selectRule:'space',
-                r2:'',
-                selectOptions:[
-                    {
-                        Text:'空格',
-                        Value:'space'
-                    },
-                    {
-                        Text:'回车',
-                        Value:'enter'
-                    }
-                ],
+                selectRule:[''],
+                ruleA:[''],
+                ruleB:[''],
             }
-        },
-        mounted(){
-            // layui.code({
-            //     title:'javascript',
-            //     encode: true
-            // });
         },
         methods: {
             replaceTxt(){
                 var str=this.beforeTxt;
-                var r1=this.selectRule;
-                var r2=this.r2;
-                console.log(r1);
-                if(r1=='space'){
-                    str = str.replace(/\ +/g, r2);
-                    str = str.replace(/[ ]/g, r2); 
+                var r1=this.ruleA;
+                var r2=this.ruleB;
+                
+                for(var i=0;i<r1.length;i++){
+                    str=str.replace(new RegExp(r1[i],"g"), r2[i]); 
                 }
-                else if(r1=='enter'){
-                    str=str.replace(/\r\n/g,r2)  
-                    str=str.replace(/\n/g,r2)  
-                }
-                this.afterTxt=str
+                this.afterTxt=str;
+            },
+            addRule(){
+                this.ruleA.push('');
+                this.ruleB.push('');
+            },
+            removeRule(index){
+                this.ruleB.splice(index,1);
+                this.ruleA.splice(index,1);
             }
         }
     }

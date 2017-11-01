@@ -42,7 +42,7 @@ function getMenuItems(){
         },
         {
             Key: '204',
-            MenuName: '字符串替换',
+            MenuName: '简单模板替换',
             MenuUrl: '/strsplit'
         },
         {
