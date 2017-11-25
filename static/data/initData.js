@@ -1,6 +1,5 @@
 window.siteData={
-    MenuItems:getMenuItems(),
-    SiteInfo:getSiteInfo(),
+    MenuItems:getMenuItems()
 }
 initTongJi()
 function getMenuItems(){
@@ -49,41 +48,8 @@ function getMenuItems(){
             Key: '205',
             MenuName: '人民币转换',
             MenuUrl: '/rmbconvert'
-        },
-        {
-            Key: '300',
-            MenuName: '友情链接',
-            ChildrenMenu:[
-                {
-                    Key: '301',
-                    MenuName: '易墨‘s_Blog',
-                    MenuUrl: 'http://www.yimo.link',
-                },
-                {
-                    Key: '302',
-                    MenuName: '听梦网',
-                    MenuUrl: 'http://www.mxmsg.com/',
-                }
-            ]
         }
     ];
-}
-function getSiteInfo(){
-    return {
-        SiteName:'个人工具站 - By 易墨',
-        LogoUrl:'',//http://www.yimo.link/static/imgs/logo.png',
-        ShowMsg:true,
-        FooterLinks:[
-            {
-                Title: '易墨‘s_Blog',
-                Url: 'http://www.yimo.link',
-            },
-            {
-                Title:'分分钟拥有自己的站点吧',
-                Url:'https://coding.net/u/yimocoding/p/metools/git/blob/master/不花一分钱就能拥有自己的工具站点.MD'
-            }
-        ]
-    }
 }
 //需替换为自己的统计代码
 function initTongJi(){

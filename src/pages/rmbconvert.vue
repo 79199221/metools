@@ -35,11 +35,6 @@
                     {
                         Name:'main',
                         Title:'人民币转换'
-                    },
-                    {
-                        Title:'查看代码',
-                        Name:'code',
-                        Url:'http://coding.net/u/yimocoding/p/metools/git/blob/master/src/pages/rmbconvert.vue',
                     }
                 ],
                 beforeTxt:'',

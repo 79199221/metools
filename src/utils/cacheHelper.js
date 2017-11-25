@@ -1,7 +1,7 @@
 export default {
     GetCacheByKey(key){
       var data=localStorage.getItem(key);
-      return eval(data);
+      return data;
     },
     SetCacheByKey(key,data){
       if(typeof(data)==="object"){

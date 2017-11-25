@@ -4,7 +4,7 @@
                 <input type="text" placeholder="请选择" @click="changeSelect" readonly :value="currentValue.Text" class="layui-input layui-unselect">
                 <i class="layui-edge"></i>
             </div>
-            <dl class="layui-anim layui-anim-upbit" v-show="selectShow">
+            <dl class="layui-anim layui-anim-upbit" v-show="selectShow" >
                 <dd v-for="item in options" :class="{'layui-this':currentValue.Value==item.Value}" @click="currentSelect(item)"  value="item.Value">{{item.Text}}</dd>
             </dl>
         </div>
@@ -38,6 +38,7 @@
                 self.currentValue=item
                 this.changeSelect();
                 this.$emit('input', item.Value);
+                this.$emit('change', item.Value);
             },
             changeSelect(){
                 this.selectShow=!this.selectShow;

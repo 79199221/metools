@@ -3,76 +3,46 @@
         <ul class="layui-tab-title site-demo-title" style="margin-bottom:10px;">
             <li :class="{'layui-this':tabType==1}"   @click="switchTab(1)">可逆加密/解密</li>
             <li :class="{'layui-this':tabType==2}" @click="switchTab(2)">散列/哈希</li>
-            <li @click="$options.filters.openRedirect('https://github.com/brix/crypto-js')">crypto-js使用</li>
-            <li @click="$options.filters.openRedirect('http://coding.net/u/yimocoding/p/metools/git/blob/master/src/pages/encrypt.vue')">查看代码</li>
         </ul>
         <div style="width:100%;height:100%;" v-if="tabType==1">                
             <div class="layui-form-item layui-form-text">
-                <label class="layui-form-label">明文</label>
-                <div class="layui-input-block">
                 <textarea v-model="model.beforeTxt" placeholder="加密/解密字符串..." class="layui-textarea"></textarea>
-                </div>
             </div>
             <div class="layui-form-item layui-form-text">
-                <label class="layui-form-label">加密类型</label>
-                <div class="layui-input-block">
                     <v-radio :value="model.currentType" :optionVals="encryptTypes" @input="currentHandler"></v-radio>
-                </div>
             </div>
             <div class="layui-form-item layui-form-text">
-                <label class="layui-form-label">密匙</label>
-                <div class="layui-input-block">
                     <input type="text" v-model="model.pwdTxt" placeholder="密匙" class="layui-input" />
-                </div>
             </div>
             <div class="layui-form-item layui-form-text">
-                <div class="layui-input-block">
                     <v-button @click="encrypt(model.currentType)">
                         <span><i class="layui-icon">&#xe61a; </i>加密</span>
                     </v-button>
                     <v-button @click="decrypt(model.currentType)">
                         <span>解密 <i class="layui-icon">&#xe619; </i></span>
                     </v-button>
-                </div>
             </div>
             <div class="layui-form-item layui-form-text">
-                <label class="layui-form-label">密文</label>
-                <div class="layui-input-block">
                 <textarea v-model="model.afterTxt" placeholder="加密后字符串..." class="layui-textarea"></textarea>
-                </div>
             </div>
         </div>
         <div style="width:100%;height:100%;" v-if="tabType==2">                
             <div class="layui-form-item layui-form-text">
-                <label class="layui-form-label">明文</label>
-                <div class="layui-input-block">
                 <textarea v-model="model.beforeTxt" placeholder="加密/解密字符串..." class="layui-textarea"></textarea>
-                </div>
             </div>
             <div class="layui-form-item layui-form-text">
-                <label class="layui-form-label">加密类型</label>
-                <div class="layui-input-block">
                     <v-radio :value="model.currentType" :optionVals="hashTypes" @input="currentHandler"></v-radio>
-                </div>
             </div>
             <div class="layui-form-item layui-form-text" v-if="hashPwdTypes.indexOf(model.currentType)>-1">
-                <label class="layui-form-label">密匙</label>
-                <div class="layui-input-block">
                     <input type="text" v-model="model.pwdTxt" placeholder="密匙" class="layui-input" />
-                </div>
             </div>
             <div class="layui-form-item layui-form-text">
-                <div class="layui-input-block">
                     <v-button @click="hashEncrypt(model.currentType)">
                         <span><i class="layui-icon">&#xe61a; </i>加密</span>
                     </v-button>
-                </div>
             </div>
             <div class="layui-form-item layui-form-text">
-                <label class="layui-form-label">密文</label>
-                <div class="layui-input-block">
                 <textarea v-model="model.afterTxt" placeholder="加密后字符串..." class="layui-textarea"></textarea>
-                </div>
             </div>
         </div>
     </div>

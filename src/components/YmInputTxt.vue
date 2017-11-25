@@ -1,9 +1,6 @@
 <template>         
     <div class="layui-form-item layui-form-text">
-        <label class="layui-form-label" v-text="label"></label>
-        <div class="layui-input-block">
             <textarea v-keydown-tab v-model="currentValue" :placeholder="placeholder" class="layui-textarea" :class="areaClass"></textarea>
-        </div>
     </div>
 </template>
 <script>
