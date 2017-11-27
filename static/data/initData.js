@@ -1,7 +1,6 @@
 window.siteData={
     MenuItems:getMenuItems()
 }
-initTongJi()
 function getMenuItems(){
     return [
         {
@@ -50,17 +49,4 @@ function getMenuItems(){
             MenuUrl: '/rmbconvert'
         }
     ];
-}
-//需替换为自己的统计代码
-function initTongJi(){
-    if(location.host.indexOf('localhost')==0){
-        return;
-    }
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?83ed2a06b8c764cebb78eece2c3452a2";
-      var s = document.getElementsByTagName("script")[0]; 
-      s.parentNode.insertBefore(hm, s);
-    })();
 }

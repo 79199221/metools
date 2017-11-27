@@ -2,18 +2,11 @@
     <v-tab :items="tabItems">
         <div slot="fanyi">
             <div class="layui-form-item layui-form-text">
-                    <textarea v-model="model.beforeTxt" @keydown.enter="youdaofanyi"
-                              placeholder="请输入转换前字符串..."
+                    <textarea v-model="model.beforeTxt" @keydown.space="baidufanyi" @keyup.ctrl.86="baidufanyi"
+                              placeholder="请输入转换前字符串... 粘贴/空格后自动翻译"
                               class="layui-textarea"></textarea>
             </div>
             <div class="layui-form-item layui-form-text">
-                    <v-button @click="youdaofanyi()"
-                              v-if="!loading">
-                        <span><i class="layui-icon">&#xe61a; </i>有道翻译</span>
-                    </v-button>
-                    <v-button v-else>
-                        <span>翻译中</span>
-                    </v-button>
                     <v-button @click="baidufanyi()"
                               v-if="!loading2">
                         <span><i class="layui-icon">&#xe61a; </i>百度翻译</span>
@@ -21,13 +14,22 @@
                     <v-button v-else>
                         <span>翻译中</span>
                     </v-button>
+                    <v-button @click="youdaofanyi()"
+                              v-if="!loading">
+                        <span><i class="layui-icon">&#xe61a; </i>有道翻译</span>
+                    </v-button>
+                    <v-button v-else>
+                        <span>翻译中</span>
+                    </v-button>
             </div>
             <div class="layui-form-item layui-form-text">
-                    <textarea v-model="model.afterTxt" 
-                              placeholder="有道翻译结果..."
-                              class="layui-textarea areaResult"></textarea>
                     <textarea v-model="model.afterTxt2" 
+                              rows="15"
                               placeholder="百度翻译结果..."
+                              class="layui-textarea areaResult"></textarea>
+                    <textarea v-model="model.afterTxt" 
+                              rows="15"
+                              placeholder="有道翻译结果..."
                               class="layui-textarea areaResult"></textarea>
             </div>
             <div class="layui-form-item layui-form-text">
@@ -85,42 +87,56 @@ export default {
         q: str
       };
       self.loading = true;
-      common.SendGetRequest(api, data, function(xhr, text) {
-        console.log(text);
-        self.loading = false;
-      });
+      if (typeof chrome != undefined && chrome.tabs) {
+        data.doctype = "json";
+        common.SendGetRequest(api, data, function(text) {
+          self.loading = false;
+          var resp = JSON.parse(text);
+          if (resp.errorCode == 0) {
+            self.model.afterTxt = "";
+            resp.translation.forEach(item => {
+              self.model.afterTxt += item + "\n";
+            });
+            self.model.jsonData = "";
+          } else {
+            self.model.afterTxt = "翻译失败~~~";
+            self.model.jsonData = JSON.stringify(resp);
+          }
+        });
+        return;
+      }
 
-      //   layui.jquery.ajax({
-      //     url: api,
-      //     data: {
-      //       keyfrom: "metools",
-      //       key: "955743043",
-      //       type: "data",
-      //       doctype: "jsonp",
-      //       version: 1.1,
-      //       q: str
-      //     },
-      //     type: "get",
-      //     dataType: "jsonp",
-      //     success: function(resp) {
-      //       self.loading = false;
-      //       if (resp.errorCode == 0) {
-      //         self.model.afterTxt = "";
-      //         resp.translation.forEach(item => {
-      //           self.model.afterTxt += item + "\n";
-      //         });
-      //         self.model.jsonData = "";
-      //       } else {
-      //         self.model.afterTxt = "翻译失败~~~";
-      //         self.model.jsonData = JSON.stringify(resp);
-      //       }
-      //     },
-      //     error: function(data) {
-      //       self.loading = false;
-      //       self.model.afterTxt = "翻译失败~~~";
-      //       self.model.jsonData = JSON.stringify(data);
-      //     }
-      //   });
+      layui.jquery.ajax({
+        url: api,
+        data: {
+          keyfrom: "metools",
+          key: "955743043",
+          type: "data",
+          doctype: "jsonp",
+          version: 1.1,
+          q: str
+        },
+        type: "get",
+        dataType: "jsonp",
+        success: function(resp) {
+          self.loading = false;
+          if (resp.errorCode == 0) {
+            self.model.afterTxt = "";
+            resp.translation.forEach(item => {
+              self.model.afterTxt += item + "\n";
+            });
+            self.model.jsonData = "";
+          } else {
+            self.model.afterTxt = "翻译失败~~~";
+            self.model.jsonData = JSON.stringify(resp);
+          }
+        },
+        error: function(data) {
+          self.loading = false;
+          self.model.afterTxt = "翻译失败~~~";
+          self.model.jsonData = JSON.stringify(data);
+        }
+      });
     },
     baidufanyi() {
       //http://api.fanyi.baidu.com/api/trans/product/apihelp
@@ -151,37 +167,36 @@ export default {
         to: to,
         sign: sign
       };
-      if (typeof chrome != undefined) {
-        common.SendGetRequest(url, data, function(xhr, text) {
-          console.log(text);
+      if (typeof chrome != undefined && chrome.tabs) {
+        common.SendGetRequest(url, data, function(text) {
           self.loading2 = false;
           self.model.afterTxt2 = "";
-          data.trans_result.forEach(item => {
+          JSON.parse(text).trans_result.forEach(item => {
             self.model.afterTxt2 += item.dst + "\n";
           });
           self.model.jsonData = "";
         });
         return;
       }
-
-      //   layui.jquery.ajax({
-      //     url: url,
-      //     type: "get",
-      //     dataType: "jsonp",
-      //     success: function(data) {
-      //       self.loading2 = false;
-      //       self.model.afterTxt2 = "";
-      //       data.trans_result.forEach(item => {
-      //         self.model.afterTxt2 += item.dst + "\n";
-      //       });
-      //       self.model.jsonData = "";
-      //     },
-      //     error: function(data) {
-      //       self.loading2 = false;
-      //       self.model.afterTxt2 = "翻译失败~~~";
-      //       self.model.jsonData = JSON.stringify(data);
-      //     }
-      //   });
+      layui.jquery.ajax({
+        url: url,
+        type: "get",
+        dataType: "jsonp",
+        data: data,
+        success: function(resp) {
+          self.loading2 = false;
+          self.model.afterTxt2 = "";
+          resp.trans_result.forEach(item => {
+            self.model.afterTxt2 += item.dst + "\n";
+          });
+          self.model.jsonData = "";
+        },
+        error: function(data) {
+          self.loading2 = false;
+          self.model.afterTxt2 = "翻译失败~~~";
+          self.model.jsonData = JSON.stringify(data);
+        }
+      });
     }
   }
 };

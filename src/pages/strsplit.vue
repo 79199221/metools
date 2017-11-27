@@ -9,16 +9,10 @@
                         <span> <i class="layui-icon">&#xe654; </i>添加规则</span>
                     </v-button>
             </div>
-            <div class="layui-form-item layui-form-text" v-for="(item,index) in ruleA">
-                <div class="layui-input-inline">
-                     <input v-model="ruleA[index]"  class="layui-input" />
-                </div>
-                <div class="layui-input-inline">
+            <div class="layui-form-item layui-form-text " v-for="(item,index) in ruleA">
+                     <input v-model="ruleA[index]"  class="layui-input" placeholder="替换字符串/规则"/>
                     <span style="height:38px;line-height:38px;">→_→</span>
-                </div>
-                <div class="layui-input-inline">
                     <input type="text" class="layui-input" v-model="ruleB[index]" placeholder="替换字符串"/>
-                </div>
                 <i class="layui-icon editicon" @click="removeRule(index)">&#xe640;</i>  
             </div>
             <div class="layui-form-item layui-form-text">

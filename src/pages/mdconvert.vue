@@ -1,12 +1,5 @@
 <template>
     <v-tab :items="items">
-        <div slot="toMarkdown">
-            <v-input-txt label="HTML" v-model="htmlText1" placeholder="HTML"></v-input-txt>
-            <div class="layui-form-item layui-form-text">
-                    <v-button icon="down" @click="toMarkdown()">转为Markdown</v-button>
-            </div>
-            <v-input-txt label="MarkDown"  v-bind:value="mdText1" placeholder="MarkDown"></v-input-txt>
-        </div>
         <div slot="toHtml">
             <v-input-txt label="Markdown" v-model="mdText2" placeholder="MarkDown"></v-input-txt>
             <div class="layui-form-item layui-form-text">
@@ -14,8 +7,15 @@
             </div>
             <v-input-txt label="Html"  v-bind:value="htmlText2" placeholder="Html"></v-input-txt>
             <h2 class="site-tips">预览</h2>
-            <div v-html="htmlText2" class="layui-input-block artcontent" >
+            <div v-html="htmlText2" class=" artcontent" >
             </div>
+        </div>
+        <div slot="toMarkdown">
+            <v-input-txt label="HTML" v-model="htmlText1" placeholder="HTML"></v-input-txt>
+            <div class="layui-form-item layui-form-text">
+                    <v-button icon="down" @click="toMarkdown()">转为Markdown</v-button>
+            </div>
+            <v-input-txt label="MarkDown"  v-bind:value="mdText1" placeholder="MarkDown"></v-input-txt>
         </div>
     </v-tab>
 </template>
