@@ -21,9 +21,7 @@
         "tabs", // 标签
         "webRequest", // web请求
         "storage", // 插件本地存储
-        "http://fanyi.youdao.com/*",
-        "http://api.fanyi.baidu.com/*",
-        "https://fanyi.youdao.com/*",
-        "https://api.fanyi.baidu.com/*"
+        "http://*/*",
+        "https://*/*"
     ]
 }

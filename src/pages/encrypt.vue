@@ -91,7 +91,6 @@
             },
             currentHandler(e){
                 this.model.currentType=e;
-                console.log(e);
             },
             encrypt(type){
                 let self=this;

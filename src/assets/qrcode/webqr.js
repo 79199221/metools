@@ -1,4 +1,7 @@
-var webqr = function () {
+import qrcode from "./llqrcode";
+
+export default webqr()
+function webqr() {
 	var gCtx = null;
 	var gCanvas = null;
 	var c = 0;
@@ -142,4 +145,3 @@ var webqr = function () {
 		handleFiles
 	}
 }
-window.webqr = webqr()

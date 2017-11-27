@@ -6,7 +6,7 @@ Vue.use(VueRouter);
 const router = new VueRouter({
     mode: 'hash',//history 打包需要使用hash
     routes: [
-        { name: '/', path: '/',redirect:'/home', meta: {} },
+        { name: 'index', path: '/',redirect:'/home', meta: {} },
         { name: 'home', path: '/home', component: require('../pages/home'), meta: {} },
         { name: 'encrypt', path: '/encrypt', component: require('../pages/encrypt'), meta: {} },
         { name: 'encode', path: '/encode', component: require('../pages/encode'), meta: {} },
@@ -21,9 +21,8 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-    var current_page = cacheHelper.GetCacheByKey('current_page');
-    console.log(current_page);
-    if (to.path == '/home' && from.path == '/' && current_page != '/home' && current_page != '/') {
+    var current_page = cacheHelper.GetCacheByKey('current_page')||'/home';
+    if (to.path == '/home' && from.path == '/' && current_page != '/home') {
         //第一次到首页
         next(current_page);
         return;

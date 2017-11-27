@@ -73,7 +73,7 @@
                 else if(e.ChildrenMenu && e.ChildrenMenu.length>0){
                     e.ChildrenMenu.forEach(e2=>{
                         if(e2.MenuUrl && e2.MenuUrl.indexOf(routePath) >= 0){
-                            console.log(e2.MenuUrl.indexOf(routePath) >= 0)
+                            // console.log(e2.MenuUrl.indexOf(routePath) >= 0)
                             self.menuIndex=e.Key
                             self.showItemIndex=e.Key
                             return false
