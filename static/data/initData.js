@@ -74,6 +74,14 @@ function getSiteInfo(){
         LogoUrl:'',//http://www.yimo.link/static/imgs/logo.png',
         ShowMsg:true,
         FooterLinks:[
+            {
+                Title: '易墨‘s_Blog',
+                Url: 'http://www.yimo.link',
+            },
+            {
+                Title:'分分钟拥有自己的工具站点吧',
+                Url:'https://coding.net/u/yimocoding/p/metools/git/blob/master/不花一分钱就能拥有自己的工具站点.MD'
+            }
         ]
     }
 }
