@@ -5,35 +5,42 @@
                 <label class="layui-form-label">当前时间</label>
                 <div class="layui-input-block">
                     <input v-model="currentTime" placeholder="当前时间..." class="layui-input"/>
+                    <button class="layui-btn copy-btn" type="button" :class="{ 'layui-btn-disabled': !currentTime }"
+                            v-clipboard:copy="currentTime"
+                            v-clipboard:success="onCopy"
+                            v-clipboard:error="onError"><i class="layui-icon layui-icon-templeate-1">&#xe630;</i></button>
                 </div>
             </div>
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">当前时间戳</label>
                 <div class="layui-input-block">
                     <input v-model="currentTimestamp" placeholder="当前时间戳..." class="layui-input"/>
+                    <button class="layui-btn copy-btn" type="button" :class="{ 'layui-btn-disabled': !currentTimestamp }"
+                            v-clipboard:copy="currentTimestamp"
+                            v-clipboard:success="onCopy"
+                            v-clipboard:error="onError"><i class="layui-icon layui-icon-templeate-1">&#xe630;</i></button>
                 </div>
             </div>
+            <hr/>
             <div class="layui-form-item layui-form-text">
-                <label class="layui-form-label">输入</label>
+                <label class="layui-form-label">时间</label>
                 <div class="layui-input-block">
-                    <input v-model="timeTxt" @click="pickTime(timeTxtId)" :id="timeTxtId" placeholder="时间或时间戳..." class="layui-input"/>
+                    <input v-model="timeTxt" @click="pickTime(timeTxtId)" :id="timeTxtId" placeholder="输入时间..." class="layui-input"/>
+                    <button class="layui-btn copy-btn" type="button" :class="{ 'layui-btn-disabled': !timeTxt }"
+                        v-clipboard:copy="timeTxt"
+                        v-clipboard:success="onCopy"
+                        v-clipboard:error="onError"><i class="layui-icon layui-icon-templeate-1">&#xe630;</i></button>
                 </div>
             </div>
 
             <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">时间戳</label>
                 <div class="layui-input-block">
-                    <v-button @click="convertDxRmb()">
-                        <span>大写 <i class="layui-icon">&#xe61a; </i></span>
-                    </v-button>
-                    <v-button @click="convertXxRmb()">
-                        <span>小写 <i class="layui-icon">&#xe619; </i></span>
-                    </v-button>
-                </div>
-            </div>
-            <div class="layui-form-item layui-form-text">
-                <label class="layui-form-label">输出</label>
-                <div class="layui-input-block">
-                    <input v-model="timestampTxt" @change="inputTimestamp(timestampTxt)" placeholder="中文..." class="layui-input" />
+                    <input v-model="timestampTxt" @change="inputTimestamp(timestampTxt)" placeholder="输入时间戳..." class="layui-input" />
+                    <button class="layui-btn copy-btn" type="button" :class="{ 'layui-btn-disabled': !timestampTxt }"
+                            v-clipboard:copy="timestampTxt"
+                            v-clipboard:success="onCopy"
+                            v-clipboard:error="onError"><i class="layui-icon layui-icon-templeate-1">&#xe630;</i></button>
                 </div>
             </div>
         </div>
@@ -88,6 +95,12 @@
             },
             inputTimestamp(timestamp) {
                 this.timeTxt = !isNaN(timestamp) ? moment.unix(timestamp).format('YYYY-MM-DD HH:mm:ss') : ''
+            },
+            onCopy() {
+                layer.msg('复制成功')
+            },
+            onError(){
+                console.log('复制失败')
             }
 
         }

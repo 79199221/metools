@@ -6,7 +6,11 @@
 body{
     font-family: 'ErJian';
 }
-
+.copy-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
 a{cursor: pointer;}
 
 .layui-layout-admin .layui-header {

@@ -1,11 +1,13 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import VueClipboard from 'vue-clipboard2';
 import App from './App';
 import router from './router';
 import directives from './directives';
 import filters from './filters';
 import components from './components';
 
+Vue.use(VueClipboard)
 // 自定义样式
 import 'assets/css/app.css'
 
