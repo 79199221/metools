@@ -1,3 +1,12 @@
+@font-face {
+    font-family: 'ErJian';
+    src : url('../fonts/ErJian.v1.1.ttf');
+}
+
+body{
+    font-family: 'ErJian';
+}
+
 a{cursor: pointer;}
 
 .layui-layout-admin .layui-header {
