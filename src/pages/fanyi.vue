@@ -4,38 +4,32 @@
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">翻译的句子</label>
                 <div class="layui-input-block">
-                    <textarea v-model="model.beforeTxt" @keydown.enter="youdaofanyi"
+                    <textarea v-model="model.beforeTxt" @keydown.enter="fanyi"
                               placeholder="请输入转换前字符串..."
                               class="layui-textarea"></textarea>
+                    <button class="layui-btn copy-btn" type="button" :class="{ 'layui-btn-disabled': !model.beforeTxt }"
+                            v-clipboard:copy="model.beforeTxt"
+                            v-clipboard:success="onCopy"
+                            v-clipboard:error="onError"><i class="layui-icon layui-icon-templeate-1">&#xe630;</i></button>
                 </div>
             </div>
             <div class="layui-form-item layui-form-text">
-                <div class="layui-input-block">
-                    <v-button @click="youdaofanyi()"
-                              v-if="!loading">
-                        <span><i class="layui-icon">&#xe61a; </i>有道翻译</span>
-                    </v-button>
-                    <v-button v-else>
-                        <span>翻译中</span>
-                    </v-button>
-                    <v-button @click="baidufanyi()"
-                              v-if="!loading2">
-                        <span><i class="layui-icon">&#xe61a; </i>百度翻译</span>
-                    </v-button>
-                    <v-button v-else>
-                        <span>翻译中</span>
-                    </v-button>
+                <label class="layui-form-label">翻译</label>
+                <div class="layui-input-inline">
+                    <v-select :options="language.options" :value="language.currentValue" style="float: left;margin-right:10px;" @input="currentLanguageHandler"></v-select>
+                    <v-select :options="way.options" :value="way.currentValue" style="float: left;" @input="currentWayHandler"></v-select>
                 </div>
             </div>
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">翻译结果</label>
                 <div class="layui-input-block">
-                    <textarea v-model="model.afterTxt" 
-                              placeholder="有道翻译结果..."
-                              class="layui-textarea areaResult"></textarea>
-                    <textarea v-model="model.afterTxt2" 
-                              placeholder="百度翻译结果..."
-                              class="layui-textarea areaResult"></textarea>
+                    <textarea v-model="model.afterTxt"
+                              placeholder="翻译结果..."
+                              class="layui-textarea"></textarea>
+                    <button class="layui-btn copy-btn" type="button" :class="{ 'layui-btn-disabled': !model.beforeTxt }"
+                            v-clipboard:copy="model.beforeTxt"
+                            v-clipboard:success="onCopy"
+                            v-clipboard:error="onError"><i class="layui-icon layui-icon-templeate-1">&#xe630;</i></button>
                 </div>
             </div>
             <div class="layui-form-item layui-form-text">
@@ -51,6 +45,36 @@ import CryptoJS from 'crypto-js'
 export default {
     data() {
         return {
+            language: {
+                options: [{
+                    Value: 'zh',
+                    Text: '汉语'
+
+                },{
+                    Value: 'en',
+                    Text: '英语'
+                }],
+                currentValue: ''
+            },
+            way: {
+                options: [{
+                    Value: 'Baidu',
+                    Text: '百度翻译'
+
+                },{
+                    Value: 'Youdao',
+                    Text: '有道翻译'
+                }],
+                currentValue: ''
+            },
+            api: {
+                'Baidu': {
+                    url: 'api.fanyi.baidu.com/api/trans/vip/translate',
+                    app_id: '20180611000174806',
+                    app_secret: 's5u4COBv0vuJjYHuMeem'
+
+                }
+            },
             tabItems: [
                 {
                     Name: 'fanyi',
@@ -80,6 +104,64 @@ export default {
     },
     methods: {
         fetchData() {
+            this.language.currentValue = this.language.options[0].Value
+            this.way.currentValue = this.way.options[0].Value
+        },
+        currentLanguageHandler(e){
+            this.language.currentValue = e
+            if(!this.model.beforeTxt) {
+                this.fanyi()
+            }
+        },
+        currentWayHandler(e){
+            this.way.currentValue = e
+            if(this.model.beforeTxt) {
+                this.fanyi()
+            }
+        },
+        fanyi(){
+            let query = this.model.beforeTxt
+            let language = this.language.currentValue
+            let way = this.way.currentValue
+            switch (way) {
+                case 'Baidu':
+                    let url = (common.getProtocol()?common.getProtocol():'http') + '://' + this.api.Baidu.url
+                    let app_id = this.api.Baidu.app_id
+                    let salt = (new Date).getTime()
+                    let app_secret = this.api.Baidu.app_secret
+                    this.loading2 = true
+                    layui.jquery.ajax({
+                        url: url,
+                        type: 'GET',
+                        dataType: 'jsonp',
+                        data: {
+                            q: query,
+                            from: 'auto',
+                            to: language,
+                            appid: app_id,
+                            salt: salt,
+                            sign: CryptoJS['MD5'](app_id + query + salt + app_secret).toString(),
+                        },
+                        success: (data) => {
+                            this.loading2=false;
+                            this.model.afterTxt=''
+                            data.trans_result.forEach(item=>{
+                                this.model.afterTxt += item.dst+'\n'
+                            });
+                            this.model.jsonData='';
+                        },
+                        error: (error) => {
+                            this.loading2=false;
+                            this.model.afterTxt = '翻译失败~~~'
+                            this.model.jsonData = JSON.stringify(data);
+                        }
+                    })
+                break
+                case 'Youdao':
+
+                    break
+            }
+
         },
         youdaofanyi() {
             //http://fanyi.youdao.com/openapi?path=data-mode
@@ -174,10 +256,3 @@ export default {
 }
 
 </script>
-<style scoped>
-    .areaResult{
-        width:48%;
-        float: left;
-        margin-right: 1%;
-    }    
-</style>

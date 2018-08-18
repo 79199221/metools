@@ -56,6 +56,11 @@ function getMenuItems(){
             MenuUrl: '/timestamp'
         },
         {
+            Key: '210',
+            MenuName: '数组与Json',
+            MenuUrl: '/json'
+        },
+        {
             Key: '300',
             MenuName: '友情链接',
             ChildrenMenu:[

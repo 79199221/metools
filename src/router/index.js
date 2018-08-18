@@ -13,6 +13,7 @@ const router = new VueRouter({
         { name: 'strsplit', path: '/strsplit', component: require('../pages/strsplit'), meta: {  } },
         { name: 'rmbconvert', path: '/rmbconvert', component: require('../pages/rmbconvert'), meta: {  } },
         { name: 'timestamp', path: '/timestamp', component: require('../pages/timestamp'), meta: {  } },
+        { name: 'json', path: '/json', component: require('../pages/json'), meta: {  } },
         { name: 'mdconvert', path: '/mdconvert', component: require('../pages/mdconvert'), meta: {  } },
         { name: 'qrcode', path: '/qrcode', component: require('../pages/qrcode'),meta:{} },
         { name: 'fanyi', path: '/fanyi', component: require('../pages/fanyi'),meta:{} },
